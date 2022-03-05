@@ -1,3 +1,5 @@
+<?php session_start();
+session_destroy(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,15 +11,17 @@
     <script>
         $(document).ready(function() {
             $('button').click(function() {
-
-          
                 $.ajax({
-                    url: 'abc.html',
+                    url: 'https://jsonplaceholder.typicode.com/posts',
                     type: 'post',
-                    dataType: 'text',
+                    dataType: 'json',
                     success:function(data) {
-                        $('#display').append(data);
-                        
+                        $.each(data, function(key,value) {
+                              $('#display').append(value.userId + '<br>' + value.id + '<br>' + value.title + '<br>' + value.body);
+                        })
+                    },
+                    error:function(data) {
+                        console.log('fail');
                     }
                 });
             });
