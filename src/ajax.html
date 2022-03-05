@@ -12,11 +12,13 @@
 
           
                 $.ajax({
-                    url: 'abc.html',
+                    url: 'https://jsonplaceholder.typicode.com/posts',
                     type: 'GET',
-                    dataType: 'text',
+                    dataType: 'json',
                     success:function(data) {
-                        $('#display').append(data);
+                        $.each(data, function(key,value) {
+                             $('#display').append(value.userId + '<br>' + value.id + '<br>' + value.title + '<br>' + value.body);
+                        })
                     }
                 });
             });
